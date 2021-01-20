@@ -15,6 +15,7 @@ class UsersController < ApplicationController
     end
 
     def show
+        redirect_ifnt_logdin
         @user = User.find_by_id(params[:id])
         redirect_to '/' if !@user
 
