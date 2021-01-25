@@ -1,0 +1,26 @@
+<h1>Edit Tip!</h1>
+
+<%= render partial: "layouts/errors", locals: {object: @tip} %>
+
+<%= form_for(@tip) do |f|%>
+
+  <%= f.label "Select Tip" %>
+  <%= f.collection_select :trick_id, trick_tips_path.all, :id, :name %>
+
+  <%= f.submit %>
+
+<% end %>
+
+
+<%= form_for(@tip) do |f|%>
+
+  <%= f.label :trick %>
+  <%= f.collection_select :trick_id, Trick.all, :id, :name %>
+
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+
+
+  <%= f.submit %>
+
+<% end %>

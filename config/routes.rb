@@ -1,17 +1,30 @@
 Rails.application.routes.draw do
   root 'sessions#home'
 
-get '/signup' => 'users#new'
-post '/signup' => 'users#create'
+  get '/auth/google_oauth2/callback' => 'sessions#omniauth'
+  
+  get '/signup' => 'users#new'
+  post '/signup' => 'users#create'
 
-get '/login' => 'sessions#new'
-post '/login' => 'sessions#create'
+  get '/login' => 'sessions#new'
+  post '/login' => 'sessions#create'
 
-delete '/logout' => 'sessions#destroy'
+  delete '/logout' => 'sessions#destroy'
 
-  resources :categories
-  resources :tricks
+
+  resources :tricks do
+    resources :tips, shallow: true
+  end
+
   resources :tips
-  resources :users
+
+  resources :users do
+    resources :tricks, shallow: true
+  end
+
+  resources :categories, only: [:index, :show]
+
+
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

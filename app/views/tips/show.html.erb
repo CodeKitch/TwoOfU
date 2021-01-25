@@ -1,0 +1,8 @@
+
+<h2><%= @tip.note%> - <%= @tip.user.username%></h2>
+
+<% if @tip.user == current_user %>
+  <%= link_to "Edit Tip", edit_tip_path(@tip)%>
+<% end %>
+
+<h4>See the trick here: <%= link_to @tip.trick.name, trick_path(@tip.trick_id) %></h4>

@@ -1,0 +1,25 @@
+<%= render partial: "layouts/errors", locals: {object: @tip} %>
+
+
+<% if @tip.trick %>
+<h1>New tip for <%= @tip.trick.name%>!</h1>
+<% else %>
+<h1>Submit New Tip!</h1>
+<% end %>
+
+<%= form_for([@tip.trick, @tip]) do |f|%>
+
+ <% if !@tip.trick %>
+  <%= f.label 'Tricks:' %>
+  <%= f.collection_select :trick_id, Trick.all, :id, :name, prompt: '  --  Select Trick  --  '  %>
+<% else %>
+    <%= f.hidden_field :trick_id %>
+<% end %>
+
+  <%= f.label 'New Tip:' %>
+  <%= f.text_area :note %>
+
+
+  <%= f.submit %>
+
+<% end %>

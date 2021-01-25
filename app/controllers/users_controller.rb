@@ -15,12 +15,10 @@ class UsersController < ApplicationController
     end
 
     def show
-        redirect_ifnt_logdin
-        @user = User.find_by_id(params[:id])
+        redirect_if_not_logged_in
+        @user = User.includes(tricks: :category).find_by_id(params[:id])
         redirect_to '/' if !@user
-
     end
-
 
     private 
 

@@ -1,0 +1,12 @@
+<ul>
+  <% @categories.each do |category| %>
+    <li>
+      <%= link_to category.ilk, category_path(category) %>
+      <ol>
+        <% category.tricks.each do |trick| %>
+          <li><%= link_to trick.name, trick_path(trick) %></li>
+        <% end  %>
+      </ol>
+    </li>
+  <% end %>
+</ul>

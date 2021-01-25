@@ -1,11 +1,7 @@
 class SessionsController < ApplicationController
+    
     def home
 
-    end
-
-    def destroy
-        session.clear
-        redirect_to root_path
     end
 
     def create
@@ -17,6 +13,21 @@ class SessionsController < ApplicationController
             flash[:message] = "Something didn't happen during login, please try again!"
             redirect_to '/login'
         end
+    end
+
+    def omniauth
+        user = User.from_omniauth(request.env['omniauth.auth'])
+        if user.valid?
+            session[:user_id] = user.id
+            redirect_to user_path(user)
+        else
+            redirect_to '/signin'
+        end
+    end 
+
+    def destroy
+        session.clear
+        redirect_to root_path
     end
 
 end

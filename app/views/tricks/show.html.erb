@@ -1,0 +1,27 @@
+
+<h1>Magic Trick: <%=@trick.name%></h1>
+
+<h2>By: <%=link_to @trick.user.username, user_path(@trick.user)%> </h2>
+
+<h3>Performance Type: <%= @trick.category.try(:ilk)%></h3>
+<% if @trick.user == current_user %>
+<h4><%= link_to "Edit Trick", edit_trick_path(@trick)%></h4>
+<% end %>
+
+<%= link_to  'Delete Trick', trick_path(@trick), method: 'delete' %>
+<p><%= link_to 'Add a new tip', new_trick_tip_path(@trick)%></p>
+
+<% if !@trick.tips.empty? %>
+  <p><%= link_to 'See all tips', trick_tips_path(@trick)%></p>
+  <h4>Most Recent tips:</h4>
+  <% @trick.tips.order(updated_at: :desc).limit(3).each do |t|%>
+    <li>
+      <strong><%= t.user.username%></strong> says "<%= link_to t.note, trick_tips_path(@trick,t)%>" at <%= t.updated_at.strftime("%I:%M %p on %m/%d/%Y") %>
+    </li>
+  <% end %>
+<% end %>
+
+
+
+
+

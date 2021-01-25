@@ -1,0 +1,28 @@
+ <%= index_display_header %>
+
+<%= form_tag("/tricks", method: 'get') do %>
+  <%= label_tag(:q, "Search for:") %>
+  <%= text_field_tag(:q) %>
+  <%= submit_tag("Search") %>
+<% end %>
+
+<br>
+<%= form_tag("/tricks", method: 'get') do %>
+  <%= label_tag(:category_id, "Select a Performance Type:") %>
+  <%= collection_select(:trick,:category_id, Category.all,:id, :ilk) %>
+  <%= submit_tag("Filter") %>
+<% end %>
+
+<% if @tricks.blank? %>
+
+    <h2>No tricks yet! Enter your tricks <%= link_to "here!", new_trick_path%></h2>
+
+<% else %>
+
+<ul>
+    <% @tricks.each do |t|%>
+      <li><%= link_to t.name, trick_path(t) %></li>
+    <% end %>
+</ul>
+
+<% end %>

@@ -1,0 +1,24 @@
+<h1>Enter Your Favorite Magic Tricks</h1>
+
+<%= render partial: "layouts/errors", locals: {object: @trick} %>
+
+<%= form_for(@trick) do |f|%>
+
+  <p>
+    <%= f.label :name, 'Trick Name:' %>
+    <%= f.text_field :name %>
+  </p>
+
+  <p>
+    <%= f.label "Choose a Performance Types:" %>
+    <%= f.collection_select :category_id, Category.all, :id, :ilk, prompt: 'Choose Performance Type' %>
+  </p>
+
+  <p>Or Create a New Performance Type:
+    <%= f.fields_for :category do |c|%>
+    <%= c.text_field :ilk%>
+  </p>
+  <% end %>
+  
+<%= f.submit %>
+<% end %>

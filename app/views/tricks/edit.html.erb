@@ -1,0 +1,25 @@
+<h1>Edit <%= @trick.name%>!</h1>
+
+<%= render partial: "layouts/errors", locals: {object: @trick} %>
+
+
+
+<%= form_for(@trick) do |f|%>
+
+  <%= f.label "Choose Performance Type:" %>
+  <%= f.collection_select :category_id, Category.all, :id, :ilk, include_blank: true %>
+
+
+   <p>Or create a performance types:
+  <%= f.fields_for :category do |c|%>
+    <%= c.text_field :ilk%>
+  <% end %>
+  </p>
+
+  <br>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  
+  <%= f.submit %>
+
+<% end %>

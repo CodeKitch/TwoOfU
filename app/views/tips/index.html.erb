@@ -1,0 +1,11 @@
+<% if @trick %>
+  <h1>Tips for <%= @trick.name%></h1>
+<% else %>
+  <h1>All Tips</h1>
+<% end %>
+
+<ul>
+<% @tips.each do |n|%>
+  <li><%= n.user.username%> advised: "<%= n.note%>" about the trick: <strong><%= link_to n.trick.name, trick_path(n.trick_id) %></strong></li>
+<% end %>
+</ul>

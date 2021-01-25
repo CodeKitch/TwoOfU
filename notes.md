@@ -31,3 +31,22 @@ rails g resource category name --no-test-framework
 
 
 rails generate controller home index  --no-helper --no-assets --no-controller-specs --no-view-specs
+
+---------
+ 
+<%= form_for(@trick) do |f| %>
+
+<%= f.label :name %>
+<%= f.text_field :name %>
+
+<%= f.submit %>
+
+<% end %>
+
+<ul>
+    <% @tricks.each do |p|%>
+      <li><%= link_to p.name, trick_path(p) %> - <%= p.name%> </li>
+    <% end %>
+</ul>
+
+

@@ -1,0 +1,8 @@
+
+<h1><%= @category.ilk %> - <%= pluralize(@category.tricks.count, "trick") %></h1>
+
+<ol>
+    <% @category.tricks.each do  |trick| %>
+      <li><%= link_to trick.ilk, trick_path(trick)  %></li>
+    <% end  %>
+</ol>

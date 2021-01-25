@@ -1,1 +1,17 @@
-<h1>Wecome <%= @user.username %></h1>
+<h1> MAGICIAN: <%=@user.username %></h1>
+
+
+
+<%= display_tricks %>
+
+
+
+<ul>
+    <% @user.tricks.each do |t|%>
+      <li><%= link_to t.name, trick_path(t) %></li>
+    <% end %>
+</ul>
+
+
+
+
