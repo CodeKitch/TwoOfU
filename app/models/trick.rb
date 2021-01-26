@@ -18,7 +18,7 @@ def self.filter(params)
 end
 
 def self.search(params)
-  left_joins(:tips).where("LOWER(posts.name) LIKE :term OR LOWER(posts.note) LIKE :term OR LOWER(tips.note) LIKE :term", term: "%#{params}%")
+  left_joins(:tips).where("LOWER(tricks.name) LIKE :term OR LOWER(tricks.note) LIKE :term OR LOWER(tips.note) LIKE :term", term: "%#{params}%")
 end
 
 def category_attributes=(attr)

@@ -20,13 +20,13 @@
   <br>
     <%= link_to 'Add Trick', new_trick_path %> |
     <%= link_to 'All Tricks', tricks_path %> |
-    <%= link_to 'My Tricks', user_tricks_path(current_user) %> 
+    <%= link_to 'My Tricks', user_tricks_path(current_user) %>
   <br>
   <br>
     <%= link_to 'Add a Tip', new_tip_path %> |
     <%= link_to 'All Tips', tips_path %> |
-    
-   
+
+
     <% else %>
     <%= link_to  'Sign Up', signup_path %> |
     <%= link_to  'Log In', login_path %>

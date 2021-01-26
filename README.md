@@ -1,24 +1,36 @@
-# README
+# Two Of U
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+__Two Of U__ is a Ruby on Rails backed application. __Two Of U__ allows you to get tips for your favorite magic tricks. Create an account by signing up and save your favorite magic tricks allowing other users to share tips for your shared magic tricks.
 
-Things you may want to cover:
+## Installing / Getting started
 
-* Ruby version
+Run `bundle install`; this will install gem dependencies from the included `Gemfile` generating the needed `Gemfile.lock` file.
 
-* System dependencies
+`bundle install`
 
-* Configuration
+## Usage
 
-* Database creation
+This Ruby on Rails application will function on a local server simulating an online experience. Use the Ruby on Rails Server or your preferred environment to accomplish this.
+[Rails Server](https://guides.rubyonrails.org/getting_started.html)
 
-* Database initialization
+### Built With
 
-* How to run the test suite
+Ruby on Rails, Ruby, Active Record, Html, CSS
 
-* Services (job queues, cache servers, search engines, etc.)
+### Prerequisites
 
-* Deployment instructions
+```ruby
+Ruby
+```
 
-* ...
+## Version
+
+**0.1.0**
+
+## Contributors
+
+- JaSON Rete
+
+## Licensing
+
+This application is licensed under the [MIT License](LICENSE).

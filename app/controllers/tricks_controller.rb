@@ -1,6 +1,6 @@
 class TricksController < ApplicationController
   before_action :redirect_if_not_logged_in
-  
+
   def new
     if params[:user_id] && @user = User.find_by_id(params[:user_id])
       @trick = @user.tricks.build
@@ -18,8 +18,8 @@ class TricksController < ApplicationController
       @tricks = Trick.alpha.includes(:category, :user)
     end
 
-    @tricks = @tricks.search(params[:q].downcase) if params[:q] && !params[:q].empty?
-    @tricks = @tricks.filter(params[:trick][:category_id]) if params[:trick] && params[:trick][:category_id] != ""
+    # @tricks = @tricks.search(params[:q].downcase) if params[:q] && !params[:q].empty?
+    # @tricks = @tricks.filter(params[:trick][:category_id]) if params[:trick] && params[:trick][:category_id] != ""
 
   end
 
@@ -54,9 +54,9 @@ class TricksController < ApplicationController
   end
 
   def destroy
-    @trick = Trick.find_by_id(params[:id])
+    @trick = Trick.find_by(id: params[:id])
     @trick.destroy
-    redirect_to tricks_path
+    redirect_to tricks_path, notice: 'Trick was successfully deleted!'
   end
 
   private
