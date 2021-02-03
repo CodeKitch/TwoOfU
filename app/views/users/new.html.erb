@@ -1,12 +1,6 @@
 <h1>SIGN UP</h1>
 
-
-<ul>
-    <% @user.tricks.each do |t|%>
-      <li><%= link_to t.name, trick_path(t) %> - <%= t.name%> </li>
-    <% end %>
-</ul>
-
+<%= render partial: "layouts/errors", locals: {object: @user} %>
 
 
 <%= form_for @user, url:'/signup' do |f| %>

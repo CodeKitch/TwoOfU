@@ -20,7 +20,7 @@ Tip
 Category
     - name
     has_many :tricks
-    has_many :users, through: :tricks 
+    has_many :users, through: :tricks
 
 
 
@@ -33,7 +33,7 @@ rails g resource category name --no-test-framework
 rails generate controller home index  --no-helper --no-assets --no-controller-specs --no-view-specs
 
 ---------
- 
+
 <%= form_for(@trick) do |f| %>
 
 <%= f.label :name %>
@@ -48,5 +48,31 @@ rails generate controller home index  --no-helper --no-assets --no-controller-sp
       <li><%= link_to p.name, trick_path(p) %> - <%= p.name%> </li>
     <% end %>
 </ul>
+
+==========================================
+
+<h1>SIGN UP</h1>
+
+
+<ul>
+    <% @user.tricks.each do |t|%>
+      <li><%= link_to t.name, trick_path(t) %> - <%= t.name%> </li>
+    <% end %>
+</ul>
+
+
+
+<%= form_for @user, url:'/signup' do |f| %>
+<%= f.label :username %>
+<%= f.text_field :username %>
+
+<%= f.label :email %>
+<%= f.email_field :email, required:true %>
+
+<%= f.label :password %>
+<%= f.password_field :password %>
+
+<%= f.submit "Submit"%>
+<% end %>
 
 
