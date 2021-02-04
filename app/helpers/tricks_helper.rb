@@ -1,5 +1,5 @@
 module TricksHelper
-  def index_display_header
+  def index_display_trick_header
     if @user
       content_tag(:h1, "#{@user.username}'s Tricks:")
     else

@@ -18,8 +18,8 @@ class TricksController < ApplicationController
       @tricks = Trick.alpha.includes(:category, :user)
     end
 
-    # @tricks = @tricks.search(params[:q].downcase) if params[:q] && !params[:q].empty?
-    # @tricks = @tricks.filter(params[:trick][:category_id]) if params[:trick] && params[:trick][:category_id] != ""
+    @tricks = @tricks.search(params[:q].downcase) if params[:q] && !params[:q].empty?
+    @tricks = @tricks.filter(params[:trick][:category_id]) if params[:trick] && params[:trick][:category_id] != ""
 
   end
 

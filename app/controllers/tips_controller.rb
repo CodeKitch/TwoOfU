@@ -1,14 +1,14 @@
 class TipsController < ApplicationController
-    
+
     before_action :redirect_if_not_logged_in
     before_action :set_tip, only: [:show, :edit, :update]
-    before_action :redirect_if_not_tip_author, only: [:edit, :update]
-    
+    before_action :redirect_if_not_tip_magician, only: [:edit, :update]
+
     def index
         if params[:trick_id] && @trick = Trick.find_by_id(params[:trick_id])
             @tips = @trick.tips
         else
-            @error = "We don't know about that trick!" if params[:trick_id]
+            @error = "We don't know about that tip!" if params[:trick_id]
             @tips = Tip.all
         end
     end
@@ -32,8 +32,13 @@ class TipsController < ApplicationController
     end
 
     def show
-        @tip = Tip.find_by(id: params[:id])
+        @tip = Tip.find_by_id(params[:id])
+        redirect_to tips_path if !@tip
     end
+
+    # def show
+    #     @tip = Tip.find_by(id: params[:id])
+    # end
 
     def edit
         @tip = current_user.tips.build(params)
@@ -43,7 +48,7 @@ class TipsController < ApplicationController
             render :new
       end
     end
-  
+
     def update
       if @tip.update(tip_params)
         redirect_to tip_path(@tip)
@@ -53,16 +58,21 @@ class TipsController < ApplicationController
     end
 
     private
-    
+
     def tip_params
         params.require(:tip).permit(:note, :trick_id)
     end
-    
+
     def set_tip
         @tip = Tip.find_by(id: params[:id])
         if !@tip
-          flash[:message] = "Tip was not found"
+          flash[:message] = "Tip Not Located"
           redirect_to tips_path
         end
     end
+
+    def redirect_if_not_tip_magician
+        redirect_to tipss_path if @tip.user != tip_user
+    end
+
 end
