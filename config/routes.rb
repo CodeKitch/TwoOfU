@@ -19,7 +19,7 @@ Rails.application.routes.draw do
   resources :tips
 
   resources :users do
-    resources :tricks
+    resources :tricks, shallow: true
   end
 
   resources :categories, only: [:index, :show]

@@ -2,7 +2,7 @@ class TipsController < ApplicationController
 
     before_action :redirect_if_not_logged_in
     before_action :set_tip, only: [:show, :edit, :update]
-    before_action :redirect_if_not_tip_magician, only: [:edit, :update]
+    # before_action :redirect_if_not_tip_magician, only: [:edit, :update]
 
     def index
         if params[:trick_id] && @trick = Trick.find_by_id(params[:trick_id])
@@ -11,8 +11,6 @@ class TipsController < ApplicationController
             @error = "We don't know about that tip!" if params[:trick_id]
             @tips = Tip.all
         end
-
-        @tip = @tip.search(params[:note].downcase) if params[:note] && !params[:note].empty?
 
     end
 
@@ -39,26 +37,29 @@ class TipsController < ApplicationController
         redirect_to tips_path if !@tip
     end
 
-    # def show
-    #     @tip = Tip.find_by(id: params[:id])
-    # end
-
     def edit
-        @tip = current_user.tips.build(params)
-        if @tip.save
-            redirect_to tips_path
-        else
-            render :new
+        @tip = Tip.find_by_id(params[:id])
+        redirect_to tips_path if !@tip || @tip.user != current_user
+        # @tip.build_category if !@tip.category
       end
-    end
 
-    def update
-      if @tip.update(tip_params)
-        redirect_to tip_path(@tip)
-      else
-        render :edit
+      def update
+         @tip = Tip.find_by(id: params[:id])
+         redirect_to tips_path if !@tip || @tip.user != current_user
+        if @tip.update(tip_params)
+          redirect_to tip_path(@tip)
+        else
+          render :edit
+        end
       end
-    end
+
+      def destroy
+        @tip = Tip.find_by(id: params[:id])
+        # redirect_if_not_authorized
+        @tip.destroy
+        redirect_to tips_path, notice: 'Tip was successfully deleted!'
+      end
+
 
     private
 

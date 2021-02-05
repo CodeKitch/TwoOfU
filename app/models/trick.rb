@@ -11,12 +11,8 @@ class Trick < ApplicationRecord
   scope :alpha, -> { order(:ilk) }
   scope :most_tips, -> {left_joins(:tips).group('tricks.id').order('count(tips.trick_id) desc')}
 
-  def self.filter(params)
+  def self.filter
     where("category_id = ?", params)
-  end
-
-  def self.search(params)
-    left_joins(:tips).where("LOWER(tricks.name) LIKE :term OR LOWER(tricks.note) LIKE :term OR LOWER(tips.note) LIKE :term", term: "%#{params}%")
   end
 
   def category_attributes=(attr)

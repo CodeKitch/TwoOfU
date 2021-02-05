@@ -2,23 +2,17 @@
 
 <%= render partial: "layouts/errors", locals: {object: @tip} %>
 
-<%= form_for(@tip) do |f|%>
+<%= form_for([@tip.trick, @tip]) do |f|%>
 
-  <%= f.label "Select Tip" %>
-  <%= f.collection_select :trick_id, trick_tips_path.all, :id, :name %>
-
-  <%= f.submit %>
-
+ <% if !@tip.trick %>
+  <%= f.label 'Tricks:' %>
+  <%= f.collection_select :trick_id, Trick.all, :id, :name, prompt: '  --  Select Trick  --  '  %>
+<% else %>
+    <%= f.hidden_field :trick_id %>
 <% end %>
 
-
-<%= form_for(@tip) do |f|%>
-
-  <%= f.label :trick %>
-  <%= f.collection_select :trick_id, Trick.all, :id, :name %>
-
-  <%= f.label :name %>
-  <%= f.text_field :name %>
+  <%= f.label 'New Tip:' %>
+  <%= f.text_area :note %>
 
 
   <%= f.submit %>
