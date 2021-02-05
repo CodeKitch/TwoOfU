@@ -1,13 +1,30 @@
- <%= index_display_header %>
+ <%= index_display_tip_header %>
 
-<% if @trick %>
-  <h1>Tips for <%= @trick.name%></h1>
-<% else %>
-  <h1>All Tips</h1>
+ <%= form_tag("/tip", method: 'get') do %>
+  <%= label_tag(:note, "Search for:") %>
+  <%= text_field_tag(:note) %>
+  <%= submit_tag("Search") %>
 <% end %>
+
+
+
+<% if @tips.blank? %>
+
+    <h2>No tips yet! Enter your tips <%= link_to "here!", new_tip_path%></h2>
+
+<% else %>
+
+<ul>
+    <% @tips.each do |t|%>
+      <li><%= link_to t.note, tip_path(t) %></li>
+    <% end %>
+</ul>
+
+<% end %>
+
 
 <ul>
 <% @tips.each do |n|%>
-  <li><%= n.user.username%> advised: "<%= n.note%>" about the trick: <strong><%= link_to n.trick.name, trick_path(n.trick_id) %></strong></li>
+  <li><%= n.user.username%> advised: "<%= link_to n.note%>" about the trick: <strong><%= link_to n.trick.name, trick_path(n.trick_id) %></strong></li>
 <% end %>
 </ul>

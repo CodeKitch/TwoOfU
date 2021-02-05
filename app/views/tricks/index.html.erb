@@ -1,10 +1,6 @@
- <%= index_display_tip_header %>
+ <%= index_display_trick_header %>
 
-<%= form_tag("/tricks", method: 'get') do %>
-  <%= label_tag(:q, "Search for:") %>
-  <%= text_field_tag(:q) %>
-  <%= submit_tag("Search") %>
-<% end %>
+
 
 <br>
 <%= form_tag("/tricks", method: 'get') do %>

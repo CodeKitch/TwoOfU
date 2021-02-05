@@ -9,7 +9,7 @@ module TricksHelper
 
   def display_tricks
     if @user.tricks.empty?
-      tag.h2(link_to('Save your first tricks here!', new_trick_path))
+      tag.h2(link_to('Save your first trick here!', new_trick_path))
     else
       user = @user == current_user ? 'Your' : "#{@user.username}'s"
       content_tag(:h2, "#{user} #{pluralize(@user.tricks.count, 'Trick')}:")

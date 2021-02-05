@@ -18,7 +18,6 @@ class TricksController < ApplicationController
       @tricks = Trick.alpha.includes(:category, :user)
     end
 
-    @tricks = @tricks.search(params[:q].downcase) if params[:q] && !params[:q].empty?
     @tricks = @tricks.filter(params[:trick][:category_id]) if params[:trick] && params[:trick][:category_id] != ""
 
   end
@@ -55,14 +54,28 @@ class TricksController < ApplicationController
 
   def destroy
     @trick = Trick.find_by(id: params[:id])
+    redirect_if_not_authorized
     @trick.destroy
     redirect_to tricks_path, notice: 'Trick was successfully deleted!'
+
+  #   delete '/my_songs/:id' do
+  #     @my_song = MySong.find(params["id"])
+  #     redirect_if_not_authorized
+  #     @my_song.destroy
+  #     redirect '/my_songs'
+  # end
   end
 
   private
 
   def trick_params
     params.require(:trick).permit(:name, :category_id, :category, category_attributes: [:ilk])
+  end
+
+  def redirect_if_not_authorized
+    if  @trick.user != current_user
+        redirect_to trick_path(@trick)
+    end
   end
 
 end

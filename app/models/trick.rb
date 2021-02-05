@@ -6,23 +6,21 @@ class Trick < ApplicationRecord
 
   validates :ilk, :name, presence: true
 
-
-
-  delegate :ilk, to: :category
+  delegate :ilk, to: :category, allow_nil: true
 
   scope :alpha, -> { order(:ilk) }
   scope :most_tips, -> {left_joins(:tips).group('tricks.id').order('count(tips.trick_id) desc')}
 
-def self.filter(params)
-  where("category_id = ?", params)
-end
+  def self.filter(params)
+    where("category_id = ?", params)
+  end
 
-def self.search(params)
-  left_joins(:tips).where("LOWER(tricks.name) LIKE :term OR LOWER(tricks.note) LIKE :term OR LOWER(tips.note) LIKE :term", term: "%#{params}%")
-end
+  def self.search(params)
+    left_joins(:tips).where("LOWER(tricks.name) LIKE :term OR LOWER(tricks.note) LIKE :term OR LOWER(tips.note) LIKE :term", term: "%#{params}%")
+  end
 
-def category_attributes=(attr)
-  self.category = Category.find_or_create_by(attr) if !attr[:ilk].blank?
-end
+  def category_attributes=(attr)
+    self.category = Category.find_or_create_by(attr) if !attr[:ilk].blank?
+  end
 
 end

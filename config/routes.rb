@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   root 'sessions#home'
 
   get '/auth/google_oauth2/callback' => 'sessions#omniauth'
-  
+
   get '/signup' => 'users#new'
   post '/signup' => 'users#create'
 
@@ -13,13 +13,13 @@ Rails.application.routes.draw do
 
 
   resources :tricks do
-    resources :tips, shallow: true
+    resources :tips
   end
 
   resources :tips
 
   resources :users do
-    resources :tricks, shallow: true
+    resources :tricks
   end
 
   resources :categories, only: [:index, :show]

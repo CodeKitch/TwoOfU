@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-    
+
     def home
 
     end
@@ -10,7 +10,7 @@ class SessionsController < ApplicationController
         session[:user_id] = user.id
         redirect_to user_path(user)
         else
-            flash[:message] = "Something didn't happen during login, please try again!"
+            flash[:message] = "Magic didn't happen during login, please try again!"
             redirect_to '/login'
         end
     end
@@ -23,7 +23,7 @@ class SessionsController < ApplicationController
         else
             redirect_to '/signin'
         end
-    end 
+    end
 
     def destroy
         session.clear

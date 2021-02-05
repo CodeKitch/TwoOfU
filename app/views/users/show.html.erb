@@ -4,14 +4,19 @@
 
 <%= display_tricks %>
 
-
-
 <ul>
-    <% @user.tricks.each do |t|%>
-      <li><%= link_to t.name, trick_path(t) %></li>
+    <% @user.tricks.each do |tk|%>
+      <li><%= link_to tk.name, trick_path(tk) %></li>
     <% end %>
 </ul>
 
+<%= display_tips %>
+
+<ul>
+    <% @user.tips.each do |tp|%>
+      <li><%= link_to tp.note, tip_path(tp) %></li>
+    <% end %>
+</ul>
 
 
 

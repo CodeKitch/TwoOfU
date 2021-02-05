@@ -11,6 +11,9 @@ class TipsController < ApplicationController
             @error = "We don't know about that tip!" if params[:trick_id]
             @tips = Tip.all
         end
+
+        @tip = @tip.search(params[:note].downcase) if params[:note] && !params[:note].empty?
+
     end
 
     def new
@@ -72,7 +75,7 @@ class TipsController < ApplicationController
     end
 
     def redirect_if_not_tip_magician
-        redirect_to tipss_path if @tip.user != tip_user
+        redirect_to tip_path if @tip.user != @tip_user
     end
 
 end
