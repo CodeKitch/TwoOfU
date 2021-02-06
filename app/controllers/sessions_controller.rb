@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-
+    
     def home
 
     end
@@ -23,7 +23,7 @@ class SessionsController < ApplicationController
         else
             redirect_to '/signin'
         end
-    end
+    end 
 
     def destroy
         session.clear

@@ -2,26 +2,18 @@
 
 
 
-<br>
-<%= form_tag("/tricks", method: 'get') do %>
-  <%= label_tag(:category_id, "Select a Performance Type:") %>
-  <%= collection_select(:category,:category_id, Category.all,:id, :ilk) %>
-  <%= submit_tag("Filter") %>
-<% end %>
-
 <% if @tricks.blank? %>
 
     <h2>No tricks yet! Enter your tricks <%= link_to "here!", new_trick_path%></h2>
+
 
 <% else %>
 
 <ul>
     <% @tricks.each do |t|%>
       <li><%= link_to t.name, trick_path(t) %> suggested by: <%= t.user.username%></li>
-    <% end %>
+      <% end %>
 </ul>
 
 <% end %>
-
-
 

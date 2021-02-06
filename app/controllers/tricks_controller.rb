@@ -1,6 +1,5 @@
 class TricksController < ApplicationController
   before_action :redirect_if_not_logged_in
-  # before_action :redirect_if_not_authorized
 
   def new
     if params[:user_id] && @user = User.find_by_id(params[:user_id])
@@ -18,9 +17,6 @@ class TricksController < ApplicationController
       @error = "That user doesn't exist" if params[:user_id]
       @tricks = Trick.alpha.includes(:category, :user)
     end
-
-    @tricks = @tricks.filter(params[:category][:category_id]) if params[:trick] && params[:category][:category_id] != ""
-
 
   end
 

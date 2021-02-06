@@ -2,7 +2,6 @@ class TipsController < ApplicationController
 
     before_action :redirect_if_not_logged_in
     before_action :set_tip, only: [:show, :edit, :update]
-    # before_action :redirect_if_not_tip_magician, only: [:edit, :update]
 
     def index
         if params[:trick_id] && @trick = Trick.find_by_id(params[:trick_id])
@@ -33,18 +32,16 @@ class TipsController < ApplicationController
     end
 
     def show
-        @tip = Tip.find_by_id(params[:id])
+      set_tip
         redirect_to tips_path if !@tip
     end
 
     def edit
-        @tip = Tip.find_by_id(params[:id])
         redirect_to tips_path if !@tip || @tip.user != current_user
         # @tip.build_category if !@tip.category
       end
 
       def update
-         @tip = Tip.find_by(id: params[:id])
          redirect_to tips_path if !@tip || @tip.user != current_user
         if @tip.update(tip_params)
           redirect_to tip_path(@tip)

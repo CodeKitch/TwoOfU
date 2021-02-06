@@ -11,9 +11,6 @@ class Trick < ApplicationRecord
   scope :alpha, -> { order(:ilk) }
   scope :most_tips, -> {left_joins(:tips).group('tricks.id').order('count(tips.trick_id) desc')}
 
-  def self.filter
-    where("category_id = ?", params)
-  end
 
   def category_attributes=(attr)
     self.category = Category.find_or_create_by(attr) if !attr[:ilk].blank?
