@@ -18,6 +18,21 @@ class TricksController < ApplicationController
       @tricks = Trick.alpha.includes(:category, :user)
     end
 
+     if params[:name]
+          @tricks = Trick.find_magic(params[:name])
+
+
+
+
+
+          # @tricks = Trick.where('name LIKE ?', "%#{params[:name]}%")
+
+     end
+
+
+
+
+
   end
 
   def create
